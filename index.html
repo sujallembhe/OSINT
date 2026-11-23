@@ -1,192 +1,776 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sujal Lembhe | Freelance OSINT Analyst</title>
+  <title>Sujal Lembhe | Freelance OSINT & Threat Intelligence Analyst</title>
   <style>
     :root {
-      --bg: #0d1117;
-      --card: #161b22;
-      --card-2: #1f2630;
-      --border: #30363d;
-      --text: #c9d1d9;
-      --muted: #8b949e;
-      --accent: #58a6ff;
-      --accent-soft: rgba(88, 166, 255, 0.12);
+      --bg: #090d16;
+      --bg-soft: #0f1624;
+      --card: #131c2e;
+      --card-hover: #182338;
+      --border: #23314d;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-2: #10b981;
+      --accent-glow: rgba(56, 189, 248, 0.14);
     }
-    * { box-sizing: border-box; }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.08), transparent 35%),
+        radial-gradient(circle at 85% 25%, rgba(16, 185, 129, 0.06), transparent 35%);
       color: var(--text);
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 36px 20px 64px;
       line-height: 1.65;
     }
-    h1 { color: #ffffff; margin: 0 0 6px; font-size: 2rem; }
-    h2 { color: var(--accent); margin: 34px 0 14px; font-size: 1.3rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
-    h3 { color: #ffffff; margin: 0 0 8px; font-size: 1.1rem; }
-    p { margin: 0 0 10px; }
-    .subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 16px; }
-    .badge {
-      display: inline-block;
-      background: var(--accent-soft);
+
+    a {
       color: var(--accent);
-      border: 1px solid rgba(88, 166, 255, 0.35);
-      padding: 3px 10px;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 13, 22, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #ffffff;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      box-shadow: 0 0 8px var(--accent-2);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      font-size: 0.92rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 64px 0 44px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #6ee7b7;
+      padding: 5px 13px;
       border-radius: 999px;
-      font-size: 12px;
+      font-size: 0.82rem;
       font-weight: 600;
-      margin-right: 6px;
-      margin-bottom: 8px;
+      margin-bottom: 18px;
     }
-    .tag {
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 2.85rem);
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.06rem;
+      margin-bottom: 26px;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #06101f;
+      font-weight: 700;
+      padding: 11px 20px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
       display: inline-block;
-      background: var(--card-2);
-      border: 1px solid var(--border);
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 12.5px;
-      margin: 3px 4px 3px 0;
-      color: var(--text);
+      transition: transform 0.15s ease, opacity 0.15s ease;
     }
-    .card {
+
+    .btn-primary:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    .btn-secondary {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      font-weight: 600;
+      padding: 11px 20px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-block;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      background: var(--card-hover);
+      text-decoration: none;
+    }
+
+    .trust-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .trust-item {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 15px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .trust-item strong {
+      display: block;
+      color: #ffffff;
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+
+    /* Sections */
+    section {
+      padding: 36px 0;
+    }
+
+    .section-header {
+      margin-bottom: 22px;
+    }
+
+    .section-header h2 {
+      font-size: 1.55rem;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    /* Services Grid */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+      gap: 18px;
+    }
+
+    .service-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 16px;
+      border-radius: 12px;
+      padding: 22px;
+      transition: border-color 0.2s ease, transform 0.2s ease;
     }
-    .meta { color: var(--muted); font-size: 0.88rem; margin-bottom: 12px; }
-    .btn {
-      background: var(--card-2);
+
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .service-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--accent);
+      background: var(--accent-glow);
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+
+    .service-card h3 {
+      color: #ffffff;
+      font-size: 1.12rem;
+      margin-bottom: 8px;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 12px;
+    }
+
+    .service-card ul {
+      list-style: none;
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+
+    .service-card li {
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 5px;
+    }
+
+    .service-card li::before {
+      content: "›";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* Reports Cards */
+    .report-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    .report-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .report-badge {
+      display: inline-block;
+      background: var(--accent-glow);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .report-meta {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .report-card h3 {
+      color: #ffffff;
+      font-size: 1.2rem;
+      margin: 6px 0 8px;
+    }
+
+    .report-summary {
+      color: var(--text);
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+    }
+
+    .report-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-sm {
+      background: var(--bg-soft);
       color: var(--accent);
       border: 1px solid var(--border);
-      padding: 7px 14px;
-      border-radius: 6px;
+      padding: 8px 14px;
+      border-radius: 7px;
       font-size: 0.88rem;
+      font-weight: 600;
       cursor: pointer;
-      margin-top: 6px;
+      display: inline-block;
+      transition: all 0.15s ease;
     }
-    .btn:hover { border-color: var(--accent); background: var(--accent-soft); }
-    .details {
+
+    .btn-sm:hover {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+      text-decoration: none;
+    }
+
+    .btn-pdf {
+      background: rgba(16, 185, 129, 0.12);
+      color: #6ee7b7;
+      border-color: rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-pdf:hover {
+      background: rgba(16, 185, 129, 0.22);
+      border-color: #6ee7b7;
+    }
+
+    .details-box {
       display: none;
-      margin-top: 14px;
-      padding-top: 14px;
+      margin-top: 16px;
+      padding-top: 16px;
       border-top: 1px dashed var(--border);
-      font-size: 0.94rem;
-    }
-    .details.open { display: block; }
-    ul { margin: 6px 0 12px 20px; }
-    li { margin-bottom: 5px; }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .disclaimer {
-      font-size: 0.85rem;
+      font-size: 0.93rem;
       color: var(--muted);
-      background: #12161c;
-      border-left: 3px solid var(--accent);
-      padding: 12px 14px;
+    }
+
+    .details-box.open {
+      display: block;
+    }
+
+    .details-box ul {
+      margin-left: 18px;
+    }
+
+    .details-box li {
+      margin-bottom: 6px;
+    }
+
+    .details-box strong {
+      color: var(--text);
+    }
+
+    code {
+      background: #0b111e;
+      border: 1px solid var(--border);
+      padding: 1px 6px;
       border-radius: 4px;
+      font-size: 0.85em;
+      color: #93c5fd;
+    }
+
+    /* Methodology & Compliance */
+    .compliance-box {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent-2);
+      border-radius: 10px;
+      padding: 20px 22px;
+      font-size: 0.93rem;
+      color: var(--muted);
+    }
+
+    .compliance-box h3 {
+      color: #ffffff;
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    /* Contact Section */
+    .contact-card {
+      background: linear-gradient(135deg, #131c2e 0%, #0f172a 100%);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      color: #ffffff;
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+    }
+
+    .contact-info p {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-bottom: 16px;
+    }
+
+    .email-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #ffffff;
+      margin-bottom: 12px;
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      background: var(--accent-glow);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .inquiry-form {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .inquiry-form input,
+    .inquiry-form select,
+    .inquiry-form textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-family: inherit;
+    }
+
+    .inquiry-form input:focus,
+    .inquiry-form select:focus,
+    .inquiry-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+      padding: 24px 0 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.86rem;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Sujal Lembhe</h1>
-    <p class="subtitle">Freelance OSINT Analyst • SOCMINT • Domain & Infrastructure Recon • IMINT / Geolocation</p>
-    <span class="badge">Passive Open-Source Collection</span>
-    <span class="badge">Structured Intelligence Reporting</span>
-    <span class="badge">Facts vs. Inference Discipline</span>
-  </header>
 
-  <h2>About & Freelance Scope</h2>
-  <div class="card">
-    <p>I provide structured Open-Source Intelligence (OSINT) research using strictly passive, publicly available sources. Every report separates verified public indicators from analyst inferences and documents scope limitations clearly.</p>
-    <p><strong>Core Deliverables:</strong> Handle & cross-account attribution checks (SOCMINT), domain/DNS/subdomains/TLS posture reviews (Web OSINT), and visual/landmark geolocation verification (IMINT).</p>
-    <div class="disclaimer">
-      <strong>Ethical & OPSEC Note:</strong> Portfolio samples reflect passive public-source analysis and demonstration reviews without intrusive scanning or unauthorized access.
+  <!-- Top Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span>Sujal Lembhe | OSINT</span>
+      </div>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#reports">Sample Reports</a>
+        <a href="#ethics">Scope & Ethics</a>
+        <a href="#contact">Contact</a>
+      </div>
     </div>
-  </div>
+  </nav>
 
-  <h2>Sample Intelligence Reports</h2>
+  <main class="container">
 
-  <!-- 1. SOCMINT -->
-  <div class="card">
-    <span class="badge">SOCMINT</span>
-    <h3>1. Unofficial Handle & Cross-Platform Pivot Assessment</h3>
-    <div class="meta">Target: @mukesh.ambaniii (Instagram) • Collection: Passive Social Recon • Date: Nov 20, 2026</div>
-    <p><strong>Summary:</strong> Assessed public profile indicators to determine account authenticity and map linked handles (@mrsachin.19 and @ishaambaniii), classifying the handle as an unofficial/fan account.</p>
-    <button class="btn" onclick="toggleDetails('socmint-details', this)">View Report Breakdown</button>
-    <div id="socmint-details" class="details">
-      <ul>
-        <li><strong>Classification:</strong> Unofficial / Fan Account (public figure does not maintain an official Instagram account).</li>
-        <li><strong>Pivots & Linked Profiles:</strong> Cross-profile observation connected the handle to Instagram handle <code>@mrsachin.19</code> and YouTube channel <code>@ishaambaniii</code> (3.99K subscribers, 172 uploaded videos).</li>
-        <li><strong>Bio & Visual Indicators:</strong> Observed bio phrase <code>"jerry blessed"</code> and outdoor/crop visual context.</li>
-        <li><strong>Limitations & Inference Control:</strong> Separated observable text/visuals from unverified inferences (such as personal devotion or permanent village residence) and restricted findings to public data at collection time.</li>
-      </ul>
+    <!-- Hero Section -->
+    <div class="hero">
+      <div class="status-pill">Available for Freelance & Contract OSINT Projects</div>
+      <h1>Actionable <span>Open-Source Intelligence</span> for Brand Protection, Due Diligence & Recon</h1>
+      <p>
+        Hi, I'm <strong>Sujal Lembhe</strong> — a Freelance OSINT Analyst specializing in passive digital footprint audits, social media handle verification (SOCMINT), external domain/DNS posture reviews, and visual geolocation verification (IMINT).
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">Request an OSINT Audit</a>
+        <a href="#reports" class="btn-secondary">View Sample PDF Reports</a>
+      </div>
+
+      <div class="trust-strip">
+        <div class="trust-item">
+          <strong>100% Passive OSINT</strong>
+          Publicly accessible records only — zero intrusive scanning.
+        </div>
+        <div class="trust-item">
+          <strong>Facts vs. Inference</strong>
+          Clear separation of verified indicators from assumptions.
+        </div>
+        <div class="trust-item">
+          <strong>Decision-Ready PDFs</strong>
+          Structured executive summaries, pivots, and evidence logs.
+        </div>
+      </div>
     </div>
-  </div>
 
-  <!-- 2. DOMAIN / WEB OSINT -->
-  <div class="card">
-    <span class="badge">WEB & INFRASTRUCTURE OSINT</span>
-    <h3>2. Domain Footprint, DNS, TLS & Subdomain Reconnaissance</h3>
-    <div class="meta">Target: paytm.com • Collection: Passive Open-Source Recon • Date: Nov 20, 2026</div>
-    <p><strong>Summary:</strong> Mapped public domain registration, DNS/edge infrastructure, email/certificate controls, and passively observed subdomains for <code>paytm.com</code>.</p>
-    <button class="btn" onclick="toggleDetails('osint-details', this)">View Report Breakdown</button>
-    <div id="osint-details" class="details">
-      <ul>
-        <li><strong>Domain & WHOIS:</strong> Created <code>23-06-2003</code>; registrar redacted/not found in query output; ownership note flagged for official WHOIS/corporate verification prior to client delivery.</li>
-        <li><strong>Infrastructure & Security Posture:</strong> Deduplicated IPv4 <code>172.65.64.51</code>, AWS nameservers, Cloudflare, Inc. edge/hosting, Google Workspace email, DigiCert TLS certificate, and presence of SPF, DMARC, and CAA records.</li>
-        <li><strong>Observed Subdomains:</strong> <code>fs.paytm.com</code>, <code>pi.paytm.com</code>, <code>wa.paytm.com</code>, <code>api.paytm.com</code>, <code>bid.paytm.com</code>.</li>
-        <li><strong>Limitations:</strong> Deduplicated raw notes, standardized spelling, and relied strictly on passive public records without active scanning or intrusive testing.</li>
-      </ul>
+    <!-- Freelance Services Section (B2B & Policy-Safe) -->
+    <section id="services">
+      <div class="section-header">
+        <h2>Freelance OSINT Services</h2>
+        <p>Focused intelligence deliverables tailored for startups, agencies, researchers, and legal/compliance teams.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="service-card">
+          <span class="service-tag">SOCMINT & Brand Trust</span>
+          <h3>Brand Impersonation & Handle Verification</h3>
+          <p>Identify fake/fan accounts, map cross-platform handle links, and document public attribution indicators.</p>
+          <ul>
+            <li>Official vs. unofficial account verification</li>
+            <li>Cross-platform username & bio pivoting</li>
+            <li>Evidence-backed takedown documentation</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <span class="service-tag">Attack Surface Recon</span>
+          <h3>Domain, DNS & Infrastructure Audit</h3>
+          <p>Passive external visibility review of corporate domains, subdomains, DNS security records, and TLS posture.</p>
+          <ul>
+            <li>WHOIS, nameserver & hosting/CDN mapping</li>
+            <li>Subdomain discovery & edge exposure check</li>
+            <li>SPF, DMARC, CAA & SSL/TLS certificate review</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <span class="service-tag">IMINT & Verification</span>
+          <h3>Visual & Geolocation Verification</h3>
+          <p>Authenticate street-level images, landmarks, and media origins using architectural and spatial cross-referencing.</p>
+          <ul>
+            <li>Landmark & regional marker identification</li>
+            <li>Camera orientation & satellite alignment</li>
+            <li>Reverse image & stock/archive origin check</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sample Reports Section -->
+    <section id="reports">
+      <div class="section-header">
+        <h2>Sample Intelligence Reports</h2>
+        <p>Review full demonstration reports to inspect formatting, analytical rigor, and limitation disclosures.</p>
+      </div>
+
+      <!-- Report 1 -->
+      <div class="report-card">
+        <div class="report-top">
+          <span class="report-badge">SOCMINT REPORT</span>
+          <span class="report-meta">Target: @mukesh.ambaniii (Instagram) • Date: Nov 20, 2026</span>
+        </div>
+        <h3>1. Unofficial Handle & Cross-Platform Pivot Assessment</h3>
+        <p class="report-summary">
+          Conducted a passive social reconnaissance review to classify account authenticity and map cross-platform links (<code>@mrsachin.19</code> on Instagram and <code>@ishaambaniii</code> on YouTube).
+        </p>
+        <div class="report-actions">
+          <button class="btn-sm" onclick="toggleDetails('rep-socmint', this)">View Key Findings</button>
+          <a class="btn-sm btn-pdf" href="./SOCIAL%20MEDIA%20INTELLIGENCE%20(SOCMINT)%20REPORT.pdf" target="_blank">Open Full PDF Report ↗</a>
+        </div>
+        <div id="rep-socmint" class="details-box">
+          <ul>
+            <li><strong>Account Classification:</strong> Confirmed as an unofficial/fan account rather than an official executive profile.</li>
+            <li><strong>Pivots & Linked Channels:</strong> Correlated with Instagram creator handle <code>@mrsachin.19</code> and YouTube channel <code>@ishaambaniii</code> (3.99K subscribers, 172 videos).</li>
+            <li><strong>Facts vs. Inference Discipline:</strong> Documented visible bio text (<code>"jerry blessed"</code>) and visual background cues while explicitly flagging lifestyle/residence assumptions as unverified inferences.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Report 2 -->
+      <div class="report-card">
+        <div class="report-top">
+          <span class="report-badge">WEB & INFRASTRUCTURE OSINT</span>
+          <span class="report-meta">Target: paytm.com • Date: Nov 20, 2026</span>
+        </div>
+        <h3>2. Domain Footprint, DNS, TLS & Subdomain Reconnaissance</h3>
+        <p class="report-summary">
+          Mapped passive domain history, edge/cloud hosting architecture, email authentication controls (SPF/DMARC/CAA), and publicly observable subdomains for <code>paytm.com</code>.
+        </p>
+        <div class="report-actions">
+          <button class="btn-sm" onclick="toggleDetails('rep-osint', this)">View Key Findings</button>
+          <a class="btn-sm btn-pdf" href="./OPEN-SOURCE%20INTELLIGENCE%20(OSINT)%20.pdf" target="_blank">Open Full PDF Report ↗</a>
+        </div>
+        <div id="rep-osint" class="details-box">
+          <ul>
+            <li><strong>Registration & DNS:</strong> Creation date <code>23-06-2003</code>, AWS nameservers, Cloudflare edge/hosting (<code>172.65.64.51</code>), Google Workspace mail, and DigiCert TLS certificates.</li>
+            <li><strong>Security Controls:</strong> Verified active SPF, DMARC, and CAA DNS policy records.</li>
+            <li><strong>Discovered Subdomains:</strong> <code>fs.paytm.com</code>, <code>pi.paytm.com</code>, <code>wa.paytm.com</code>, <code>api.paytm.com</code>, and <code>bid.paytm.com</code> via passive sources only.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Report 3 -->
+      <div class="report-card">
+        <div class="report-top">
+          <span class="report-badge">IMINT & GEOLOCATION</span>
+          <span class="report-meta">Target: Street-Level Landmark Verification • Confidence: High</span>
+        </div>
+        <h3>3. Street-Level Visual & Landmark Geolocation Verification</h3>
+        <p class="report-summary">
+          Geolocated an unlabelled street-level photograph to <strong>Chandni Chowk, Old Delhi, India</strong> (opposite the Red Fort), verified against <strong>Sri Digambar Jain Lal Mandir</strong>.
+        </p>
+        <div class="report-actions">
+          <button class="btn-sm" onclick="toggleDetails('rep-imint', this)">View Key Findings</button>
+          <a class="btn-sm btn-pdf" href="./GEOLOCATION%20%26%20VISUAL%20INTELLIGENCE%20(IMINT)%20REPORT.pdf" target="_blank">Open Full PDF Report ↗</a>
+        </div>
+        <div id="rep-imint" class="details-box">
+          <ul>
+            <li><strong>Architectural Confirmation:</strong> Matched the red sandstone base, three cream/white spires (<em>shikhara</em>), and red flag of Sri Digambar Jain Lal Mandir (built 1656).</li>
+            <li><strong>Camera Orientation:</strong> Determined northward viewing perspective along the Chandni Chowk market road toward the Red Fort intersection.</li>
+            <li><strong>Source Provenance Note:</strong> Identified stock photography watermark (<code>depositphotos</code>) as part of media verification hygiene.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ethical & Legal Compliance -->
+    <section id="ethics">
+      <div class="compliance-box">
+        <h3>Ethical Methodology & Legal Scope</h3>
+        <p>
+          All research and freelance engagements are conducted strictly using passive, publicly available open-source information (OSINT) for legitimate purposes such as brand protection, corporate due diligence, media verification, and external attack-surface awareness. No unauthorized access, intrusive scanning, or private surveillance is performed.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact & Project Inquiry -->
+    <section id="contact">
+      <div class="section-header">
+        <h2>Hire Me / Request a Quote</h2>
+        <p>Send your project scope or domain/research requirements directly via email.</p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-info">
+          <h3>Direct Contract & Inquiries</h3>
+          <p>
+            Looking for a custom OSINT report, brand impersonation check, or external domain footprint review? Reach out directly or use the quick brief generator on the right.
+          </p>
+          <div class="email-pill">
+            <span id="email-text">sujallembhe769@gmail.com</span>
+            <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
+          </div>
+          <p style="font-size: 0.88rem;">
+            GitHub: <a href="https://github.com/sujallembhe" target="_blank">github.com/sujallembhe</a>
+          </p>
+        </div>
+
+        <form class="inquiry-form" onsubmit="sendMailto(event)">
+          <input type="text" id="client-name" placeholder="Your Name / Company" required />
+          <select id="service-type">
+            <option value="Brand Impersonation / SOCMINT Audit">Brand Impersonation / SOCMINT Audit</option>
+            <option value="Domain, DNS & Subdomain Recon">Domain, DNS & Subdomain Recon</option>
+            <option value="Visual / Geolocation Verification (IMINT)">Visual / Geolocation Verification (IMINT)</option>
+            <option value="Custom OSINT Research Project">Custom OSINT Research Project</option>
+          </select>
+          <textarea id="project-scope" rows="3" placeholder="Briefly describe your target domain, handle, or research objective..." required></textarea>
+          <button type="submit" class="btn-primary">Send Inquiry via Email</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Sujal Lembhe • Freelance OSINT Analyst • Contact: <a href="mailto:sujallembhe769@gmail.com">sujallembhe769@gmail.com</a>
     </div>
-  </div>
-
-  <!-- 3. IMINT / GEOLOCATION -->
-  <div class="card">
-    <span class="badge">IMINT & GEOLOCATION</span>
-    <h3>3. Street-Level Visual & Landmark Geolocation Verification</h3>
-    <div class="meta">Target: Street-Level Image & Landmark Alignment • Confidence: High</div>
-    <p><strong>Summary:</strong> Verified a street-level photograph to <strong>Chandni Chowk, Old Delhi, India</strong> (opposite the Red Fort), aligned with <strong>Sri Digambar Jain Lal Mandir</strong>.</p>
-    <button class="btn" onclick="toggleDetails('imint-details', this)">View Report Breakdown</button>
-    <div id="imint-details" class="details">
-      <ul>
-        <li><strong>Identified Location:</strong> Chandni Chowk, Old Delhi, India, directly opposite the Red Fort.</li>
-        <li><strong>Primary Landmark & Context:</strong> Sri Digambar Jain Lal Mandir (historically founded in 1656 during the Mughal era); upper-right background shows red sandstone base, three cream/white spires (<em>shikhara</em>), and a red flag.</li>
-        <li><strong>Spatial Orientation:</strong> Captured from the market road looking northward toward the main intersection and Red Fort side, with the temple positioned on the right.</li>
-        <li><strong>Limitations:</strong> High confidence based on architectural and regional markers, while noting that the source image originates from a stock archive (<code>depositphotos</code>).</li>
-      </ul>
-    </div>
-  </div>
-
-  <h2>Capabilities & Tooling</h2>
-  <div class="card">
-    <span class="tag">SOCMINT & Handle Pivoting</span>
-    <span class="tag">Domain, DNS & Subdomain Recon</span>
-    <span class="tag">SPF / DMARC / CAA & TLS Checks</span>
-    <span class="tag">Visual Geolocation (IMINT)</span>
-    <span class="tag">Landmark & Perspective Analysis</span>
-    <span class="tag">Structured Intelligence Reporting</span>
-  </div>
-
-  <h2>Contact</h2>
-  <div class="card">
-    <p>GitHub Profile: <a href="https://github.com/sujallembhe">github.com/sujallembhe</a></p>
-    <p>OSINT Portfolio Repository: <a href="https://github.com/sujallembhe/OSINT">github.com/sujallembhe/OSINT</a></p>
-  </div>
+  </footer>
 
   <script>
     function toggleDetails(id, btn) {
-      const el = document.getElementById(id);
-      const isOpen = el.classList.toggle('open');
-      btn.textContent = isOpen ? 'Hide Report Breakdown' : 'View Report Breakdown';
+      const box = document.getElementById(id);
+      const isOpen = box.classList.toggle('open');
+      btn.textContent = isOpen ? 'Hide Key Findings' : 'View Key Findings';
+    }
+
+    function copyEmail(btn) {
+      navigator.clipboard.writeText('sujallembhe769@gmail.com');
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+    }
+
+    function sendMailto(e) {
+      e.preventDefault();
+      const name = document.getElementById('client-name').value.trim();
+      const service = document.getElementById('service-type').value;
+      const scope = document.getElementById('project-scope').value.trim();
+      const subject = encodeURIComponent(`[OSINT Inquiry] ${service} - ${name}`);
+      const body = encodeURIComponent(`Hi Sujal,
+
+Name/Company: ${name}
+Service Needed: ${service}
+
+Project Details:
+${scope}
+
+Best regards,
+${name}`);
+      window.location.href = `mailto:sujallembhe769@gmail.com?subject=${subject}&body=${body}`;
     }
   </script>
+
 </body>
 </html>
